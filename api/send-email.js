@@ -34,8 +34,7 @@ export default async function handler(req, res) {
       },
       body: JSON.stringify({
         from: 'RTBIO 시스템 <onboarding@resend.dev>',
-        to: ['victoria@hamadalabs.com'],
-        cc: ['gywns548@hamadalabs.com', 'ha.500023@hamadalabs.com'],
+        to: ['gywns548@gmail.com'],
         subject: 'RTBIO 옵션 선택 결과',
         html: `
           <div style="font-family: -apple-system, 'Malgun Gothic', sans-serif; max-width: 600px; margin: 0 auto; padding: 40px 20px;">
