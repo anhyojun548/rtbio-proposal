@@ -1175,7 +1175,8 @@ function submitSelections() {
 
   const subject = encodeURIComponent('RTBIO 옵션 선택 결과');
   const body = encodeURIComponent(lines.join('\n'));
-  const mailto = `mailto:gywns548@hamadalabs.com?subject=${subject}&body=${body}`;
+  const cc = encodeURIComponent('gywns548@hamadalabs.com,ha.500023@hamadalabs.com');
+  const mailto = `mailto:victoria@hamadalabs.com?cc=${cc}&subject=${subject}&body=${body}`;
 
   window.location.href = mailto;
 
