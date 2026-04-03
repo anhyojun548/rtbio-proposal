@@ -1150,7 +1150,7 @@ function updateSummary() {
 }
 
 // ===== SUBMIT =====
-function submitSelections() {
+async function submitSelections() {
   const btn = document.getElementById('submitBtn');
   const msg = document.getElementById('submitMsg');
 
@@ -1162,34 +1162,31 @@ function submitSelections() {
     return;
   }
 
-  // Build email body
-  const lines = [
-    'RTBIO 업무 자동화 시스템 — 옵션 선택 결과',
-    '',
-    `1. 시스템 구축 방식: 옵션 ${selections.erp} — ${labels.erp[selections.erp]}`,
-    `2. 거래처 발주 방식: 옵션 ${selections.order} — ${labels.order[selections.order]}`,
-    `3. 사용 환경: 옵션 ${selections.platform} — ${labels.platform[selections.platform]}`,
-    '',
-    `제출 시각: ${new Date().toLocaleString('ko-KR')}`,
-  ];
-
-  const subject = encodeURIComponent('RTBIO 옵션 선택 결과');
-  const body = encodeURIComponent(lines.join('\n'));
-  const cc = encodeURIComponent('gywns548@hamadalabs.com,ha.500023@hamadalabs.com');
-  const mailto = `mailto:victoria@hamadalabs.com?cc=${cc}&subject=${subject}&body=${body}`;
-
-  window.location.href = mailto;
-
   btn.disabled = true;
-  btn.textContent = '메일 앱을 확인해 주세요';
-  msg.className = 'submit-msg success';
-  msg.textContent = '메일 앱이 열리면 전송 버튼을 눌러 주세요.';
+  btn.textContent = '전송 중...';
+  msg.className = '';
+  msg.textContent = '';
 
-  // Re-enable after 5s
-  setTimeout(() => {
+  try {
+    const response = await fetch('/api/send-email', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ selections }),
+    });
+
+    if (response.ok) {
+      btn.textContent = '제출 완료 ✓';
+      msg.className = 'submit-msg success';
+      msg.textContent = '선택 내용이 메일로 전송되었습니다. 감사합니다!';
+    } else {
+      throw new Error('전송 실패');
+    }
+  } catch (err) {
     btn.disabled = false;
     btn.textContent = '선택 내용 제출하기';
-  }, 5000);
+    msg.className = 'submit-msg error';
+    msg.textContent = '전송에 실패했습니다. 잠시 후 다시 시도해 주세요.';
+  }
 }
 
 // ===== SECRET ADMIN BUTTON (5 rapid clicks) =====
