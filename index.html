@@ -1,0 +1,1255 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RTBIO 업무 자동화 시스템 안내</title>
+<style>
+  :root {
+    --primary: #1B3A5C;
+    --primary-light: #2B5797;
+    --primary-lighter: #E8EEF5;
+    --accent: #00A8B5;
+    --accent-dark: #00838F;
+    --accent-light: #E0F7FA;
+    --success: #2E7D32;
+    --success-light: #E8F5E9;
+    --warning: #F57C00;
+    --warning-light: #FFF3E0;
+    --text: #1A1A2E;
+    --text-secondary: #6B7280;
+    --text-muted: #9CA3AF;
+    --border: #E5E7EB;
+    --bg: #F8F9FB;
+    --white: #FFFFFF;
+    --radius: 16px;
+    --radius-sm: 10px;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: -apple-system, 'Malgun Gothic', 'Segoe UI', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    font-size: 16px;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ===== HERO ===== */
+  .hero {
+    background: var(--primary);
+    color: white;
+    text-align: center;
+    padding: 120px 40px 80px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-video {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    object-fit: cover;
+    z-index: 0;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.55);
+    z-index: 1;
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    right: 0;
+    height: 40px;
+    background: var(--bg);
+    border-radius: 40px 40px 0 0;
+    z-index: 2;
+  }
+  .hero-content {
+    position: relative;
+    z-index: 2;
+  }
+  .hero .logo { height: 78px; width: auto; margin-bottom: 28px; filter: invert(1); }
+  .hero h1 { font-size: 42px; font-weight: 700; margin-bottom: 16px; line-height: 1.3; }
+  .hero p { font-size: 18px; opacity: 0.85; max-width: 560px; margin: 0 auto; line-height: 1.7; }
+
+  /* ===== SECTIONS ===== */
+  .section {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 56px 40px;
+  }
+  .section-label {
+    display: inline-block;
+    background: var(--accent-light);
+    color: var(--accent-dark);
+    padding: 4px 14px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 12px;
+  }
+  .section h2 {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--primary);
+    margin-bottom: 16px;
+    line-height: 1.4;
+  }
+  .section p {
+    color: var(--text-secondary);
+    margin-bottom: 16px;
+    font-size: 15px;
+  }
+  .section p strong { color: var(--text); }
+
+  .divider {
+    max-width: 860px;
+    margin: 0 auto;
+    height: 1px;
+    background: var(--border);
+  }
+
+  /* ===== PROBLEM CARDS ===== */
+  .problem-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin-top: 24px;
+  }
+  .problem-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 20px;
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+  }
+  .problem-card .icon {
+    width: 44px; height: 44px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    flex-shrink: 0;
+  }
+  .problem-card .icon.red { background: #FEE2E2; }
+  .problem-card .icon.orange { background: var(--warning-light); }
+  .problem-card .icon.gray { background: #F3F4F6; }
+  .problem-card h4 { font-size: 15px; font-weight: 600; margin-bottom: 4px; }
+  .problem-card p { font-size: 13px; color: var(--text-muted); margin: 0; }
+
+  /* ===== FLOW ===== */
+  .flow-steps {
+    margin-top: 24px;
+    position: relative;
+  }
+  .flow-step {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 0;
+    position: relative;
+    padding-bottom: 28px;
+  }
+  .flow-step:last-child { padding-bottom: 0; }
+  .flow-step:last-child .flow-line { display: none; }
+  .flow-num {
+    width: 40px; height: 40px;
+    border-radius: 50%;
+    background: var(--primary);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 15px;
+    font-weight: 700;
+    flex-shrink: 0;
+    position: relative;
+    z-index: 1;
+  }
+  .flow-line {
+    position: absolute;
+    left: 19px;
+    top: 40px;
+    bottom: 0;
+    width: 2px;
+    background: var(--border);
+  }
+  .flow-content { padding-top: 8px; }
+  .flow-content h4 { font-size: 15px; font-weight: 600; margin-bottom: 4px; }
+  .flow-content p { font-size: 13px; color: var(--text-muted); margin: 0; }
+
+  /* ===== WORLDCUP (Option Selector) ===== */
+  .worldcup {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 56px 40px;
+  }
+  .worldcup .section-label {
+    background: var(--primary-lighter);
+    color: var(--primary);
+  }
+  .worldcup h2 {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--primary);
+    margin-bottom: 8px;
+  }
+  .worldcup .wc-desc {
+    color: var(--text-secondary);
+    font-size: 15px;
+    margin-bottom: 24px;
+  }
+
+  .wc-cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    position: relative;
+  }
+  .wc-vs {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+    width: 44px; height: 44px;
+    border-radius: 50%;
+    background: var(--white);
+    border: 2px solid var(--border);
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--text-muted);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  }
+
+  .wc-card {
+    background: var(--white);
+    border: 2px solid var(--border);
+    border-radius: var(--radius);
+    padding: 24px;
+    cursor: pointer;
+    transition: all 0.25s;
+    position: relative;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .wc-card:hover { border-color: var(--accent); box-shadow: 0 4px 20px rgba(0,168,181,0.1); }
+  .wc-card.selected {
+    border-color: var(--accent);
+    background: #F6FEFF;
+    box-shadow: 0 4px 20px rgba(0,168,181,0.15);
+  }
+  .wc-card.dimmed { opacity: 0.45; transform: scale(0.97); }
+  .wc-card .check-badge {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    background: var(--accent);
+    color: white;
+    display: none;
+    align-items: center;
+    justify-content: center;
+  }
+  .wc-card.selected .check-badge { display: flex; }
+
+  .wc-badge {
+    width: 64px; height: 64px;
+    border-radius: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    margin-bottom: 16px;
+  }
+  .wc-badge.blue { background: linear-gradient(135deg, #4A90D9 0%, #357ABD 100%); }
+  .wc-badge.teal { background: linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 100%); }
+  .wc-badge.green { background: linear-gradient(135deg, #43A047 0%, #2E7D32 100%); }
+  .wc-badge.orange { background: linear-gradient(135deg, #FB8C00 0%, #E65100 100%); }
+
+  .wc-recommend {
+    display: inline-block;
+    background: var(--accent);
+    color: white;
+    padding: 2px 10px;
+    border-radius: 12px;
+    font-size: 11px;
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+
+  .wc-card h3 { font-size: 18px; font-weight: 700; margin-bottom: 8px; color: var(--text); }
+  .wc-card .wc-card-desc { font-size: 14px; color: var(--text-secondary); margin-bottom: 16px; line-height: 1.6; }
+
+  .wc-pros, .wc-cons { list-style: none; margin: 0; padding: 0; }
+  .wc-pros li, .wc-cons li {
+    font-size: 13px;
+    padding: 4px 0;
+    padding-left: 24px;
+    position: relative;
+    line-height: 1.5;
+  }
+  .wc-pros li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: var(--success);
+    font-weight: 700;
+    font-size: 14px;
+  }
+  .wc-cons li::before {
+    content: '△';
+    position: absolute;
+    left: 0;
+    color: var(--warning);
+    font-weight: 700;
+    font-size: 13px;
+  }
+  .wc-pros { margin-bottom: 8px; }
+
+  /* ===== ROLE CARDS ===== */
+  .role-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
+    margin-top: 24px;
+  }
+  .role-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 16px 20px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .role-icon {
+    width: 44px; height: 44px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    flex-shrink: 0;
+  }
+  .role-card h4 { font-size: 15px; font-weight: 600; margin-bottom: 2px; }
+  .role-card p { font-size: 13px; color: var(--text-muted); margin: 0; }
+
+  /* ===== FEATURE LIST ===== */
+  .feature-list { margin-top: 20px; }
+  .feature-item {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 20px;
+    margin-bottom: 10px;
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+  }
+  .feature-icon {
+    width: 40px; height: 40px;
+    border-radius: 10px;
+    background: var(--accent-light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    flex-shrink: 0;
+  }
+  .feature-item h4 { font-size: 15px; font-weight: 600; margin-bottom: 4px; }
+  .feature-item p { font-size: 13px; color: var(--text-muted); margin: 0; line-height: 1.6; }
+
+  /* ===== TIMELINE ===== */
+  .timeline { margin-top: 24px; }
+  .tl-item {
+    display: flex;
+    gap: 16px;
+    position: relative;
+    padding-bottom: 24px;
+  }
+  .tl-item:last-child { padding-bottom: 0; }
+  .tl-item:last-child .tl-line { display: none; }
+  .tl-dot {
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: 700;
+    flex-shrink: 0;
+    color: white;
+    position: relative;
+    z-index: 1;
+  }
+  .tl-dot.active { background: var(--accent); }
+  .tl-dot.future { background: var(--border); color: var(--text-muted); }
+  .tl-line {
+    position: absolute;
+    left: 17px;
+    top: 36px;
+    bottom: 0;
+    width: 2px;
+    background: var(--border);
+  }
+  .tl-content { padding-top: 6px; flex: 1; }
+  .tl-content h4 { font-size: 15px; font-weight: 600; margin-bottom: 2px; }
+  .tl-content p { font-size: 13px; color: var(--text-muted); margin: 0; }
+  .tl-badge {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 10px;
+    font-size: 11px;
+    font-weight: 600;
+    margin-left: 6px;
+  }
+  .tl-badge.now { background: var(--accent-light); color: var(--accent-dark); }
+  .tl-badge.next { background: #F3F4F6; color: var(--text-muted); }
+
+  /* ===== SECURITY GRID ===== */
+  .security-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-top: 24px;
+  }
+  .sec-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 16px;
+    text-align: center;
+  }
+  .sec-card .sec-icon { font-size: 28px; margin-bottom: 8px; }
+  .sec-card h4 { font-size: 13px; font-weight: 600; margin-bottom: 4px; }
+  .sec-card p { font-size: 12px; color: var(--text-muted); margin: 0; }
+
+  /* ===== COMPLETE ===== */
+  .complete-section {
+    text-align: center;
+    padding: 60px 24px;
+    max-width: 720px;
+    margin: 0 auto;
+  }
+  .complete-icon {
+    width: 72px; height: 72px;
+    border-radius: 50%;
+    background: var(--success-light);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 36px;
+    margin-bottom: 20px;
+  }
+  .complete-section h2 { font-size: 22px; font-weight: 700; margin-bottom: 8px; color: var(--primary); }
+  .complete-section p { font-size: 14px; color: var(--text-secondary); }
+
+  .btn-submit {
+    display: block;
+    width: 100%;
+    max-width: 400px;
+    margin: 28px auto 0;
+    padding: 16px 32px;
+    background: var(--accent);
+    color: white;
+    border: none;
+    border-radius: var(--radius-sm);
+    font-size: 17px;
+    font-weight: 700;
+    font-family: inherit;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .btn-submit:hover { background: var(--accent-dark); transform: translateY(-1px); box-shadow: 0 4px 16px rgba(0,168,181,0.3); }
+  .btn-submit:active { transform: scale(0.98); }
+  .btn-submit:disabled { background: var(--border); color: var(--text-muted); cursor: not-allowed; transform: none; box-shadow: none; }
+  .submit-msg {
+    text-align: center;
+    margin-top: 12px;
+    font-size: 14px;
+  }
+  .submit-msg.success { color: var(--success); }
+  .submit-msg.error { color: var(--danger); }
+
+  .selection-summary {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 24px;
+    margin-top: 24px;
+    text-align: left;
+  }
+  .selection-summary h3 { font-size: 16px; font-weight: 600; margin-bottom: 16px; color: var(--primary); }
+  .summary-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid #F3F4F6;
+    font-size: 14px;
+  }
+  .summary-row:last-child { border-bottom: none; }
+  .summary-row .label { color: var(--text-secondary); }
+  .summary-row .value { font-weight: 600; color: var(--text); }
+  .summary-row .value.pending { color: var(--text-muted); font-weight: 400; }
+
+  /* ===== FOOTER ===== */
+  footer {
+    text-align: center;
+    padding: 40px 24px;
+    font-size: 12px;
+    color: var(--text-muted);
+  }
+  footer .secret-btn {
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    font-size: 12px;
+    font-family: inherit;
+    cursor: default;
+    padding: 4px;
+    -webkit-tap-highlight-color: transparent;
+    user-select: none;
+  }
+
+  /* ===== ADMIN MODAL ===== */
+  .admin-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.5);
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+  }
+  .admin-overlay.open { display: flex; }
+  .admin-modal {
+    background: white;
+    border-radius: var(--radius);
+    padding: 32px 24px;
+    max-width: 500px;
+    width: 100%;
+    max-height: 80vh;
+    overflow-y: auto;
+  }
+  .admin-modal h2 { font-size: 18px; margin-bottom: 16px; color: var(--primary); }
+  .admin-modal .close-btn {
+    display: block;
+    width: 100%;
+    margin-top: 20px;
+    padding: 12px;
+    background: var(--primary);
+    color: white;
+    border: none;
+    border-radius: var(--radius-sm);
+    font-size: 14px;
+    font-weight: 600;
+    font-family: inherit;
+    cursor: pointer;
+  }
+
+  /* ===== SCROLL ANIMATION ===== */
+  .fade-in {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.6s, transform 0.6s;
+  }
+  .fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ===== SMALL SCREEN FALLBACK ===== */
+  @media (max-width: 640px) {
+    .hero { padding: 80px 24px 60px; }
+    .hero h1 { font-size: 28px; }
+    .hero p { font-size: 16px; }
+    .section, .worldcup { padding: 40px 20px; }
+    .problem-grid { grid-template-columns: 1fr; }
+    .wc-cards { grid-template-columns: 1fr; }
+    .wc-vs {
+      position: static;
+      transform: none;
+      margin: 0 auto;
+      width: auto; height: auto;
+      border: none;
+      border-radius: 0;
+      background: none;
+      box-shadow: none;
+    }
+    .wc-vs::before, .wc-vs::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+    .role-grid { grid-template-columns: 1fr; }
+    .security-grid { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ===== HERO ===== -->
+<div class="hero">
+  <video class="hero-video" autoplay muted loop playsinline>
+    <source src="Main_video.mp4" type="video/mp4">
+  </video>
+  <div class="hero-content">
+    <img src="hamada-logo.png" alt="HAMADA LABS" class="logo">
+    <h1>업무를 더 스마트하게,<br><img src="rtbio-logo.png" alt="RTBIO" style="height:42px;width:auto;vertical-align:middle;margin:0 4px;"> 맞춤 자동화 시스템</h1>
+    <p>엑셀과 수기 작업에서 벗어나, 클릭 한 번으로 발주부터 정산까지 자동으로 처리되는 시스템을 소개합니다.</p>
+  </div>
+</div>
+
+<!-- ===== 1. PROBLEM ===== -->
+<div class="section fade-in">
+  <span class="section-label">현재 상황</span>
+  <h2>지금 이런 불편함을 겪고 계시지 않나요?</h2>
+  <p>현재 RTBIO는 하루 약 30건의 발주를 엑셀과 수기로 처리하고 있습니다. 이 과정에서 여러 문제가 반복적으로 발생합니다.</p>
+
+  <div class="problem-grid">
+    <div class="problem-card">
+      <div class="icon red">📋</div>
+      <div>
+        <h4>같은 내용을 여러 번 입력</h4>
+        <p>발주서, 거래명세서, 정산표에 같은 데이터를 반복 입력합니다.</p>
+      </div>
+    </div>
+    <div class="problem-card">
+      <div class="icon orange">⚠️</div>
+      <div>
+        <h4>숫자 실수와 누락</h4>
+        <p>수기 입력 과정에서 금액 오류, 수량 착오가 발생합니다.</p>
+      </div>
+    </div>
+    <div class="problem-card">
+      <div class="icon gray">📊</div>
+      <div>
+        <h4>현황 파악이 어려움</h4>
+        <p>미수금이 얼마인지, 어떤 발주가 처리 안 됐는지 바로 확인할 수 없습니다.</p>
+      </div>
+    </div>
+    <div class="problem-card">
+      <div class="icon gray">🕐</div>
+      <div>
+        <h4>월말 마감에 시간 소모</h4>
+        <p>각종 자료를 모아 수작업으로 마감 보고서를 만드는 데 많은 시간이 걸립니다.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ===== 2. SOLUTION FLOW ===== -->
+<div class="section fade-in">
+  <span class="section-label">해결 방법</span>
+  <h2>시스템이 업무를 이렇게 바꿔드립니다</h2>
+  <p>발주 접수부터 정산, 보고서 생성까지 — <strong>하나의 시스템</strong>에서 자동으로 처리됩니다. 경영지원팀은 확인 버튼만 누르면 됩니다.</p>
+
+  <div class="flow-steps">
+    <div class="flow-step">
+      <div class="flow-num">1</div>
+      <div class="flow-line"></div>
+      <div class="flow-content">
+        <h4>거래처가 발주를 넣습니다</h4>
+        <p>대리점이나 병원 담당자가 온라인으로 주문을 접수합니다. 발주번호가 자동으로 생성됩니다.</p>
+      </div>
+    </div>
+    <div class="flow-step">
+      <div class="flow-num">2</div>
+      <div class="flow-line"></div>
+      <div class="flow-content">
+        <h4>경영지원팀이 확인합니다</h4>
+        <p>품목, 수량, 배송비가 자동 계산되어 표시됩니다. 이상 없으면 확정 버튼 한 번이면 끝.</p>
+      </div>
+    </div>
+    <div class="flow-step">
+      <div class="flow-num">3</div>
+      <div class="flow-line"></div>
+      <div class="flow-content">
+        <h4>출고 후 거래명세서가 자동 발송됩니다</h4>
+        <p>출고를 확인하면 PDF 거래명세서가 자동 생성되어 거래처에 이메일로 발송됩니다.</p>
+      </div>
+    </div>
+    <div class="flow-step">
+      <div class="flow-num">4</div>
+      <div class="flow-line"></div>
+      <div class="flow-content">
+        <h4>정산이 자동으로 관리됩니다</h4>
+        <p>거래처마다 설정된 정산 주기(월말, 60일 등)에 따라 미수금이 자동 집계됩니다.</p>
+      </div>
+    </div>
+    <div class="flow-step">
+      <div class="flow-num">5</div>
+      <div class="flow-content">
+        <h4>월말 보고서가 자동 생성됩니다</h4>
+        <p>마감 시점에 거래처별 원장과 보고서가 자동으로 만들어집니다. 더 이상 수작업이 필요 없습니다.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ===== 3. WORLDCUP: ERP 방향 ===== -->
+<div class="worldcup fade-in" id="wc1">
+  <span class="section-label">선택 1 / 3</span>
+  <h2>시스템 구축 방식을 선택해 주세요</h2>
+  <p class="wc-desc">기존에 사용하시는 ERP와의 관계를 어떻게 할지 결정합니다.</p>
+
+  <div class="wc-cards">
+    <div class="wc-card" onclick="selectOption('erp', 'A', this)" data-group="erp">
+      <div class="check-badge"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div>
+      <div class="wc-badge blue">✨</div>
+      <span class="wc-recommend">권장</span>
+      <h3>새로운 맞춤 시스템</h3>
+      <p class="wc-card-desc">기존 ERP와 별도로, RTBIO 업무에 100% 맞춰서 새로 만듭니다. 기존 데이터는 옮겨올 수 있습니다.</p>
+      <ul class="wc-pros">
+        <li>우리 회사 업무 방식에 딱 맞게 설계</li>
+        <li>하나의 시스템만 사용하니 관리가 간편</li>
+        <li>앞으로 기능 추가가 자유로움</li>
+      </ul>
+      <ul class="wc-cons">
+        <li>기존 데이터 옮기는 초기 작업 필요</li>
+        <li>전환 기간 중 두 시스템 병행 가능성</li>
+      </ul>
+    </div>
+
+    <div class="wc-vs">VS</div>
+
+    <div class="wc-card" onclick="selectOption('erp', 'B', this)" data-group="erp">
+      <div class="check-badge"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div>
+      <div class="wc-badge orange">🔗</div>
+      <h3>기존 ERP에 연결</h3>
+      <p class="wc-card-desc">지금 쓰고 있는 ERP는 그대로 두고, 새 시스템을 위에 덧붙여서 연결합니다.</p>
+      <ul class="wc-pros">
+        <li>기존 데이터를 바로 활용 가능</li>
+        <li>전환 부담이 적음</li>
+      </ul>
+      <ul class="wc-cons">
+        <li>기존 ERP 구조에 맞춰야 해서 자유도 제한</li>
+        <li>두 시스템 사이 데이터 충돌 관리 필요</li>
+        <li>기존 ERP 업체에 계속 의존</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ===== 4. ROLES ===== -->
+<div class="section fade-in">
+  <span class="section-label">사용자</span>
+  <h2>누가 이 시스템을 사용하나요?</h2>
+  <p>각 부서와 거래처 담당자가 <strong>자기 역할에 맞는 화면</strong>만 보고 사용합니다. 다른 부서의 데이터는 볼 수 없어 보안이 유지됩니다.</p>
+
+  <div class="role-grid">
+    <div class="role-card">
+      <div class="role-icon" style="background:#E0F7FA;">🏥</div>
+      <div>
+        <h4>거래처 (대리점/병원)</h4>
+        <p>발주 입력, 본인 주문 내역 확인</p>
+      </div>
+    </div>
+    <div class="role-card">
+      <div class="role-icon" style="background:#E8EEF5;">👩‍💼</div>
+      <div>
+        <h4>경영지원팀</h4>
+        <p>발주 확인, 거래명세서, 정산, 마감 처리</p>
+      </div>
+    </div>
+    <div class="role-card">
+      <div class="role-icon" style="background:#E8F5E9;">🔬</div>
+      <div>
+        <h4>품질관리팀</h4>
+        <p>재고 입출고, 현황 대시보드 (2단계)</p>
+      </div>
+    </div>
+    <div class="role-card">
+      <div class="role-icon" style="background:#FFF3E0;">📈</div>
+      <div>
+        <h4>영업부</h4>
+        <p>거래처별 매출, 미수금 조회 (3단계)</p>
+      </div>
+    </div>
+    <div class="role-card">
+      <div class="role-icon" style="background:#EDE7F6;">🔐</div>
+      <div>
+        <h4>관리자</h4>
+        <p>전체 시스템 설정, 계정 관리</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ===== 5. WORLDCUP: 발주 방식 ===== -->
+<div class="worldcup fade-in" id="wc2">
+  <span class="section-label">선택 2 / 3</span>
+  <h2>거래처가 발주하는 방식을 선택해 주세요</h2>
+  <p class="wc-desc">대리점이나 병원 담당자가 어떤 방식으로 주문을 넣을지 결정합니다.</p>
+
+  <div class="wc-cards">
+    <div class="wc-card" onclick="selectOption('order', 'A', this)" data-group="order">
+      <div class="check-badge"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div>
+      <div class="wc-badge teal">💻</div>
+      <span class="wc-recommend">권장</span>
+      <h3>전용 웹사이트에서 직접 발주</h3>
+      <p class="wc-card-desc">거래처 담당자가 전용 URL에 접속해서 품목을 선택하고 수량을 입력합니다. 주문이 바로 시스템에 들어옵니다.</p>
+      <ul class="wc-pros">
+        <li>주문 데이터가 정확하게 자동 입력</li>
+        <li>수기 오류가 원천 차단</li>
+        <li>추가 비용 없음</li>
+      </ul>
+      <ul class="wc-cons">
+        <li>거래처 담당자가 처음에 새 방식에 적응 필요</li>
+      </ul>
+    </div>
+
+    <div class="wc-vs">VS</div>
+
+    <div class="wc-card" onclick="selectOption('order', 'B', this)" data-group="order">
+      <div class="check-badge"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div>
+      <div class="wc-badge orange">🤖</div>
+      <h3>기존 방식(카톡/엑셀) + AI 자동 인식</h3>
+      <p class="wc-card-desc">거래처는 지금처럼 카카오톡이나 엑셀로 발주합니다. AI가 내용을 읽어서 자동으로 시스템에 입력합니다.</p>
+      <ul class="wc-pros">
+        <li>거래처 입장에서 바뀌는 게 없음</li>
+        <li>기존 업무 방식 그대로 유지</li>
+      </ul>
+      <ul class="wc-cons">
+        <li>AI 인식 정확도가 100%는 아님 (수동 수정 필요)</li>
+        <li>AI 사용에 따른 약간의 토큰 비용 발생</li>
+      </ul>
+    </div>
+  </div>
+
+  <div style="background:var(--accent-light);border-radius:var(--radius-sm);padding:16px 20px;margin-top:20px;font-size:13px;color:var(--accent-dark);">
+    <strong>💡 두 방식을 함께 사용할 수도 있습니다.</strong><br>
+    대부분의 거래처는 웹사이트로 발주하고, 변화가 어려운 일부 거래처만 기존 방식을 유지하는 병행 운영도 가능합니다.
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ===== 6. FEATURES ===== -->
+<div class="section fade-in">
+  <span class="section-label">주요 기능</span>
+  <h2>시스템이 처리해 주는 일들</h2>
+  <p>1단계에서 바로 사용할 수 있는 핵심 기능들입니다. 모두 <strong>자동으로 처리</strong>되기 때문에 경영지원팀의 수작업이 크게 줄어듭니다.</p>
+
+  <div class="feature-list">
+    <div class="feature-item">
+      <div class="feature-icon">📦</div>
+      <div>
+        <h4>거래처 & 품목 관리</h4>
+        <p>대리점/병원 정보, 결제 조건, 배송비 기준을 한곳에서 관리합니다. 품목의 사이즈·색상·가격도 등록하면 주문 시 자동 반영됩니다.</p>
+      </div>
+    </div>
+    <div class="feature-item">
+      <div class="feature-icon">🔢</div>
+      <div>
+        <h4>자동 발주번호 & 배송비 계산</h4>
+        <p>발주가 들어오면 고유 번호가 자동 생성됩니다. 배송비도 품목과 거래처 조건에 따라 자동 계산됩니다.</p>
+      </div>
+    </div>
+    <div class="feature-item">
+      <div class="feature-icon">📄</div>
+      <div>
+        <h4>거래명세서 자동 생성 & 발송</h4>
+        <p>출고 확인 후 PDF 거래명세서가 자동으로 만들어져 거래처에 이메일로 보내집니다.</p>
+      </div>
+    </div>
+    <div class="feature-item">
+      <div class="feature-icon">💰</div>
+      <div>
+        <h4>정산 & 미수금 자동 관리</h4>
+        <p>거래처마다 다른 정산 주기(월말, 60일 등)를 설정하면 시스템이 알아서 집계합니다. 미수금 현황도 실시간으로 파악됩니다.</p>
+      </div>
+    </div>
+    <div class="feature-item">
+      <div class="feature-icon">📊</div>
+      <div>
+        <h4>대시보드 & 월 마감 보고서</h4>
+        <p>신규 발주, 처리 대기, 미수금 등 주요 현황을 한눈에 볼 수 있습니다. 월말에는 보고서가 자동으로 생성됩니다.</p>
+      </div>
+    </div>
+    <div class="feature-item">
+      <div class="feature-icon">⚙️</div>
+      <div>
+        <h4>거래처별 예외 설정</h4>
+        <p>거래처마다 할인율, 배송비 면제, 외상 한도, 정산 주기를 각각 다르게 설정할 수 있습니다.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ===== 7. WORLDCUP: 웹 vs 앱 ===== -->
+<div class="worldcup fade-in" id="wc3">
+  <span class="section-label">선택 3 / 3</span>
+  <h2>시스템 사용 환경을 선택해 주세요</h2>
+  <p class="wc-desc">PC와 모바일 모두에서 사용할 수 있는 방식을 결정합니다.</p>
+
+  <div class="wc-cards">
+    <div class="wc-card" onclick="selectOption('platform', 'A', this)" data-group="platform">
+      <div class="check-badge"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div>
+      <div class="wc-badge teal">🌐</div>
+      <span class="wc-recommend">권장</span>
+      <h3>반응형 웹사이트</h3>
+      <p class="wc-card-desc">PC, 태블릿, 스마트폰 모두에서 인터넷 브라우저로 접속합니다. 앱 설치가 필요 없습니다.</p>
+      <ul class="wc-pros">
+        <li>설치 없이 바로 사용 가능</li>
+        <li>PC와 모바일 모두 지원</li>
+        <li>개발 비용이 낮고 업데이트가 즉시 반영</li>
+      </ul>
+      <ul class="wc-cons">
+        <li>푸시 알림 기능이 앱보다 제한적</li>
+        <li>외근 중 사용 경험이 앱보다 다소 불편할 수 있음</li>
+      </ul>
+    </div>
+
+    <div class="wc-vs">VS</div>
+
+    <div class="wc-card" onclick="selectOption('platform', 'B', this)" data-group="platform">
+      <div class="check-badge"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div>
+      <div class="wc-badge green">📱</div>
+      <h3>모바일 앱 (iOS/Android)</h3>
+      <p class="wc-card-desc">앱스토어에서 설치하는 전용 앱입니다. 스마트폰에 최적화된 환경을 제공합니다.</p>
+      <ul class="wc-pros">
+        <li>푸시 알림으로 실시간 알림 가능</li>
+        <li>스마트폰 사용 경험이 더 자연스러움</li>
+      </ul>
+      <ul class="wc-cons">
+        <li>앱스토어 설치가 필요 (거래처 거부감 가능)</li>
+        <li>iOS + Android 각각 개발 필요</li>
+        <li>앱스토어 심사 기간이 필요</li>
+      </ul>
+    </div>
+  </div>
+
+  <div style="background:var(--primary-lighter);border-radius:var(--radius-sm);padding:16px 20px;margin-top:20px;font-size:13px;color:var(--primary);">
+    <strong>💡 나중에 앱으로 전환할 수도 있습니다.</strong><br>
+    웹으로 먼저 시작하더라도, 시스템 구조가 앱 전환을 고려해 설계되므로 나중에 필요할 때 앱을 추가할 수 있습니다.
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ===== 8. TIMELINE ===== -->
+<div class="section fade-in">
+  <span class="section-label">확장 계획</span>
+  <h2>단계별로 기능을 넓혀갑니다</h2>
+  <p>처음부터 모든 걸 만들지 않습니다. <strong>가장 급한 것부터</strong> 시작하고, 현장에서 쓰면서 점차 확장합니다.</p>
+
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-dot active">1</div>
+      <div class="tl-line"></div>
+      <div class="tl-content">
+        <h4>경영지원팀 업무 자동화 <span class="tl-badge now">1차 범위</span></h4>
+        <p>발주 접수, 거래명세서, 정산, 마감 보고서 — 하루 30건 수기 업무를 시스템으로 전환합니다.</p>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot future">2</div>
+      <div class="tl-line"></div>
+      <div class="tl-content">
+        <h4>품질관리팀 재고 자동화 <span class="tl-badge next">추후 확장</span></h4>
+        <p>발주 확정 시 재고 자동 차감, 입출고 관리, 재고 현황 대시보드를 추가합니다.</p>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot future">3</div>
+      <div class="tl-line"></div>
+      <div class="tl-content">
+        <h4>영업부 대시보드 <span class="tl-badge next">추후 확장</span></h4>
+        <p>영업사원이 직접 거래처별 매출, 미수금, 실적을 조회할 수 있게 됩니다.</p>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot future">4</div>
+      <div class="tl-line"></div>
+      <div class="tl-content">
+        <h4>베트남 생산 & 해외 재고 연동 <span class="tl-badge next">추후 확장</span></h4>
+        <p>베트남 공장 재고와 국내 재고를 하나로 통합 조회하고, 부족 예측 알림을 받을 수 있습니다.</p>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot future">5</div>
+      <div class="tl-content">
+        <h4>의료기기 추적 & 규제 대응 <span class="tl-badge next">장기 과제</span></h4>
+        <p>병원 납품 이력, 장비 시리얼 추적, 의료기기 고유식별자(UDI) 관리까지 확장합니다.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ===== 9. SECURITY ===== -->
+<div class="section fade-in">
+  <span class="section-label">안전한 운영</span>
+  <h2>데이터는 안전하게 보호됩니다</h2>
+  <p>시스템 운영은 하마다랩스가 전담하며, <strong>모든 데이터의 소유권은 RTBIO</strong>에 있습니다.</p>
+
+  <div class="security-grid">
+    <div class="sec-card">
+      <div class="sec-icon">🔒</div>
+      <h4>암호화 보안</h4>
+      <p>모든 데이터 전송과 저장에 암호화 적용</p>
+    </div>
+    <div class="sec-card">
+      <div class="sec-icon">👤</div>
+      <h4>역할별 권한</h4>
+      <p>부서마다 볼 수 있는 데이터를 명확히 분리</p>
+    </div>
+    <div class="sec-card">
+      <div class="sec-icon">💾</div>
+      <h4>매일 자동 백업</h4>
+      <p>매일 백업, 30일 보관으로 데이터 유실 방지</p>
+    </div>
+    <div class="sec-card">
+      <div class="sec-icon">📋</div>
+      <h4>모든 변경 기록</h4>
+      <p>누가 언제 어떤 데이터를 수정했는지 기록</p>
+    </div>
+    <div class="sec-card">
+      <div class="sec-icon">🏢</div>
+      <h4>데이터 소유권</h4>
+      <p>모든 데이터는 RTBIO 소유, 계약 종료 시 전량 이관</p>
+    </div>
+    <div class="sec-card">
+      <div class="sec-icon">🛡️</div>
+      <h4>개인정보보호</h4>
+      <p>개인정보보호법(PIPA) 준수</p>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ===== 10. COMPLETE ===== -->
+<div class="complete-section fade-in" id="complete">
+  <div class="complete-icon">✅</div>
+  <h2>선택 내역을 확인해 주세요</h2>
+  <p>아래에서 선택하신 내용을 확인할 수 있습니다.<br>변경하고 싶으시면 위로 스크롤하여 다시 선택해 주세요.</p>
+
+  <div class="selection-summary" id="selectionSummary">
+    <h3>선택 요약</h3>
+    <div class="summary-row">
+      <span class="label">시스템 구축 방식</span>
+      <span class="value" id="sum-erp"><span class="pending">미선택</span></span>
+    </div>
+    <div class="summary-row">
+      <span class="label">거래처 발주 방식</span>
+      <span class="value" id="sum-order"><span class="pending">미선택</span></span>
+    </div>
+    <div class="summary-row">
+      <span class="label">사용 환경</span>
+      <span class="value" id="sum-platform"><span class="pending">미선택</span></span>
+    </div>
+  </div>
+
+  <button class="btn-submit" id="submitBtn" onclick="submitSelections()">선택 내용 제출하기</button>
+  <p class="submit-msg" id="submitMsg"></p>
+</div>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+  <img src="hamada-logo.png" alt="HAMADA LABS" style="height:28px;width:auto;opacity:0.3;margin-bottom:8px;"><br>
+  <button class="secret-btn" id="secretBtn">© 2026 HAMADA LABS</button>
+</footer>
+
+<!-- ===== ADMIN MODAL ===== -->
+<div class="admin-overlay" id="adminOverlay" onclick="if(event.target===this)closeAdmin()">
+  <div class="admin-modal">
+    <h2>🔑 관리자 확인 — 선택 결과</h2>
+    <div id="adminResult"></div>
+    <button class="close-btn" onclick="closeAdmin()">닫기</button>
+  </div>
+</div>
+
+<script>
+// ===== SELECTION STATE =====
+const selections = JSON.parse(localStorage.getItem('rtbio_selections') || '{}');
+
+const labels = {
+  erp: { A: '새로운 맞춤 시스템 (독립 구축)', B: '기존 ERP 연동형' },
+  order: { A: '웹사이트 직접 발주', B: '기존 방식 + AI 자동 인식' },
+  platform: { A: '반응형 웹사이트', B: '모바일 앱 (iOS/Android)' }
+};
+
+const labelNames = {
+  erp: '시스템 구축 방식',
+  order: '거래처 발주 방식',
+  platform: '사용 환경'
+};
+
+// Restore selections on load
+document.addEventListener('DOMContentLoaded', () => {
+  Object.keys(selections).forEach(group => {
+    const cards = document.querySelectorAll(`.wc-card[data-group="${group}"]`);
+    cards.forEach(card => {
+      const isA = card.querySelector('.wc-badge.blue, .wc-badge.teal, .wc-badge.green:not(.wc-badge.orange)');
+      // simpler approach: check card index
+    });
+  });
+  updateSummary();
+  initScrollAnimations();
+});
+
+function selectOption(group, value, el) {
+  selections[group] = value;
+  localStorage.setItem('rtbio_selections', JSON.stringify(selections));
+
+  // Update card visuals
+  const cards = document.querySelectorAll(`.wc-card[data-group="${group}"]`);
+  cards.forEach(card => {
+    card.classList.remove('selected', 'dimmed');
+    if (card === el) {
+      card.classList.add('selected');
+    } else {
+      card.classList.add('dimmed');
+    }
+  });
+
+  updateSummary();
+}
+
+function updateSummary() {
+  ['erp', 'order', 'platform'].forEach(key => {
+    const el = document.getElementById('sum-' + key);
+    if (selections[key]) {
+      el.innerHTML = labels[key][selections[key]];
+    } else {
+      el.innerHTML = '<span class="pending">미선택</span>';
+    }
+  });
+}
+
+// ===== SUBMIT =====
+function submitSelections() {
+  const btn = document.getElementById('submitBtn');
+  const msg = document.getElementById('submitMsg');
+
+  // Check all selected
+  const allSelected = selections.erp && selections.order && selections.platform;
+  if (!allSelected) {
+    msg.className = 'submit-msg error';
+    msg.textContent = '아직 선택하지 않은 항목이 있습니다. 위로 스크롤하여 모든 항목을 선택해 주세요.';
+    return;
+  }
+
+  // Build email body
+  const lines = [
+    'RTBIO 업무 자동화 시스템 — 옵션 선택 결과',
+    '',
+    `1. 시스템 구축 방식: 옵션 ${selections.erp} — ${labels.erp[selections.erp]}`,
+    `2. 거래처 발주 방식: 옵션 ${selections.order} — ${labels.order[selections.order]}`,
+    `3. 사용 환경: 옵션 ${selections.platform} — ${labels.platform[selections.platform]}`,
+    '',
+    `제출 시각: ${new Date().toLocaleString('ko-KR')}`,
+  ];
+
+  const subject = encodeURIComponent('RTBIO 옵션 선택 결과');
+  const body = encodeURIComponent(lines.join('\n'));
+  const mailto = `mailto:gywns548@hamadalabs.com?subject=${subject}&body=${body}`;
+
+  window.location.href = mailto;
+
+  btn.disabled = true;
+  btn.textContent = '메일 앱을 확인해 주세요';
+  msg.className = 'submit-msg success';
+  msg.textContent = '메일 앱이 열리면 전송 버튼을 눌러 주세요.';
+
+  // Re-enable after 5s
+  setTimeout(() => {
+    btn.disabled = false;
+    btn.textContent = '선택 내용 제출하기';
+  }, 5000);
+}
+
+// ===== SECRET ADMIN BUTTON (5 rapid clicks) =====
+let clickCount = 0;
+let clickTimer = null;
+
+document.getElementById('secretBtn').addEventListener('click', () => {
+  clickCount++;
+  if (clickTimer) clearTimeout(clickTimer);
+  clickTimer = setTimeout(() => { clickCount = 0; }, 1500);
+
+  if (clickCount >= 5) {
+    clickCount = 0;
+    openAdmin();
+  }
+});
+
+// Also ?admin=true in URL
+if (new URLSearchParams(window.location.search).get('admin') === 'true') {
+  setTimeout(openAdmin, 500);
+}
+
+function openAdmin() {
+  const result = document.getElementById('adminResult');
+  let html = '<div style="font-size:14px;">';
+
+  ['erp', 'order', 'platform'].forEach(key => {
+    const val = selections[key];
+    html += `
+      <div style="padding:12px 0;border-bottom:1px solid #F3F4F6;">
+        <div style="font-size:12px;color:var(--text-muted);margin-bottom:4px;">${labelNames[key]}</div>
+        <div style="font-weight:600;color:${val ? 'var(--text)' : 'var(--text-muted)'};">
+          ${val ? `옵션 ${val}: ${labels[key][val]}` : '미선택'}
+        </div>
+      </div>`;
+  });
+
+  const ts = new Date().toLocaleString('ko-KR');
+  html += `<div style="padding:12px 0;font-size:12px;color:var(--text-muted);">확인 시각: ${ts}</div>`;
+  html += '</div>';
+
+  result.innerHTML = html;
+  document.getElementById('adminOverlay').classList.add('open');
+}
+
+function closeAdmin() {
+  document.getElementById('adminOverlay').classList.remove('open');
+}
+
+// ===== SCROLL ANIMATIONS =====
+function initScrollAnimations() {
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.15 });
+
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+}
+</script>
+</body>
+</html>
