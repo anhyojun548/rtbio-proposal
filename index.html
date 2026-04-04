@@ -440,75 +440,6 @@
   .sec-card h4 { font-size: 13px; font-weight: 600; margin-bottom: 4px; }
   .sec-card p { font-size: 12px; color: var(--text-muted); margin: 0; }
 
-  /* ===== COMPLETE ===== */
-  .complete-section {
-    text-align: center;
-    padding: 60px 24px;
-    max-width: 720px;
-    margin: 0 auto;
-  }
-  .complete-icon {
-    width: 72px; height: 72px;
-    border-radius: 50%;
-    background: var(--success-light);
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 36px;
-    margin-bottom: 20px;
-  }
-  .complete-section h2 { font-size: 22px; font-weight: 700; margin-bottom: 8px; color: var(--primary); }
-  .complete-section p { font-size: 14px; color: var(--text-secondary); }
-
-  .btn-submit {
-    display: block;
-    width: 100%;
-    max-width: 400px;
-    margin: 28px auto 0;
-    padding: 16px 32px;
-    background: var(--accent);
-    color: white;
-    border: none;
-    border-radius: var(--radius-sm);
-    font-size: 17px;
-    font-weight: 700;
-    font-family: inherit;
-    cursor: pointer;
-    transition: all 0.2s;
-  }
-  .btn-submit:hover { background: var(--accent-dark); transform: translateY(-1px); box-shadow: 0 4px 16px rgba(0,168,181,0.3); }
-  .btn-submit:active { transform: scale(0.98); }
-  .btn-submit:disabled { background: var(--border); color: var(--text-muted); cursor: not-allowed; transform: none; box-shadow: none; }
-  .submit-msg {
-    text-align: center;
-    margin-top: 12px;
-    font-size: 14px;
-  }
-  .submit-msg.success { color: var(--success); }
-  .submit-msg.error { color: var(--danger); }
-
-  .selection-summary {
-    background: var(--white);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 24px;
-    margin-top: 24px;
-    text-align: left;
-  }
-  .selection-summary h3 { font-size: 16px; font-weight: 600; margin-bottom: 16px; color: var(--primary); }
-  .summary-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 0;
-    border-bottom: 1px solid #F3F4F6;
-    font-size: 14px;
-  }
-  .summary-row:last-child { border-bottom: none; }
-  .summary-row .label { color: var(--text-secondary); }
-  .summary-row .value { font-weight: 600; color: var(--text); }
-  .summary-row .value.pending { color: var(--text-muted); font-weight: 400; }
-
   /* ===== FOOTER ===== */
   footer {
     text-align: center;
@@ -516,55 +447,6 @@
     font-size: 12px;
     color: var(--text-muted);
   }
-  footer .secret-btn {
-    background: none;
-    border: none;
-    color: var(--text-muted);
-    font-size: 12px;
-    font-family: inherit;
-    cursor: default;
-    padding: 4px;
-    -webkit-tap-highlight-color: transparent;
-    user-select: none;
-  }
-
-  /* ===== ADMIN MODAL ===== */
-  .admin-overlay {
-    display: none;
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,0.5);
-    z-index: 1000;
-    align-items: center;
-    justify-content: center;
-    padding: 24px;
-  }
-  .admin-overlay.open { display: flex; }
-  .admin-modal {
-    background: white;
-    border-radius: var(--radius);
-    padding: 32px 24px;
-    max-width: 500px;
-    width: 100%;
-    max-height: 80vh;
-    overflow-y: auto;
-  }
-  .admin-modal h2 { font-size: 18px; margin-bottom: 16px; color: var(--primary); }
-  .admin-modal .close-btn {
-    display: block;
-    width: 100%;
-    margin-top: 20px;
-    padding: 12px;
-    background: var(--primary);
-    color: white;
-    border: none;
-    border-radius: var(--radius-sm);
-    font-size: 14px;
-    font-weight: 600;
-    font-family: inherit;
-    cursor: pointer;
-  }
-
   /* ===== OPTION BLOCKS ===== */
   .option-block {
     margin-top: 48px;
@@ -599,21 +481,9 @@
     border: 2px solid var(--accent);
     border-radius: var(--radius);
     padding: 28px;
-    cursor: pointer;
     position: relative;
-    transition: all 0.25s;
     box-shadow: 0 4px 20px rgba(0,168,181,0.1);
   }
-  .recommend-card:hover { box-shadow: 0 6px 24px rgba(0,168,181,0.18); }
-  .recommend-card.selected { background: #F6FEFF; box-shadow: 0 4px 20px rgba(0,168,181,0.15); }
-  .recommend-card .check-badge {
-    position: absolute; top: 16px; right: 16px;
-    width: 28px; height: 28px; border-radius: 50%;
-    background: var(--accent); color: white;
-    display: none; align-items: center; justify-content: center;
-  }
-  .recommend-card.selected .check-badge { display: flex; }
-  .recommend-card.dimmed { opacity: 0.45; transform: scale(0.98); }
   .recommend-tag {
     display: inline-block;
     background: var(--accent);
@@ -632,20 +502,8 @@
     border: 1px solid var(--border);
     border-radius: var(--radius-sm);
     padding: 20px;
-    cursor: pointer;
     position: relative;
-    transition: all 0.25s;
   }
-  .alt-card:hover { border-color: var(--text-muted); }
-  .alt-card.selected { border-color: var(--accent); background: #F6FEFF; }
-  .alt-card .check-badge {
-    position: absolute; top: 12px; right: 12px;
-    width: 24px; height: 24px; border-radius: 50%;
-    background: var(--accent); color: white;
-    display: none; align-items: center; justify-content: center;
-  }
-  .alt-card.selected .check-badge { display: flex; }
-  .alt-card.dimmed { opacity: 0.45; transform: scale(0.97); }
   .alt-tag {
     display: inline-block;
     background: #F3F4F6;
@@ -1025,8 +883,7 @@
     <h3 class="option-title">선택 1 / 3 — 시스템 구축 방식</h3>
     <p class="option-desc">기존에 사용하시는 ERP와의 관계를 어떻게 할지 결정합니다.</p>
     <div class="recommend-layout">
-      <div class="recommend-card" onclick="selectOption('erp', 'A', this)" data-group="erp">
-        <div class="check-badge"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div>
+      <div class="recommend-card">
         <span class="recommend-tag">권장</span>
         <h3>새로운 맞춤 시스템</h3>
         <p class="rc-desc">기존 ERP와 별도로, RTBIO 업무에 100% 맞춰서 새로 만듭니다. 기존 데이터는 옮겨올 수 있습니다.</p>
@@ -1036,8 +893,7 @@
           <li>앞으로 기능 추가가 자유로움</li>
         </ul>
       </div>
-      <div class="alt-card" onclick="selectOption('erp', 'B', this)" data-group="erp">
-        <div class="check-badge"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div>
+      <div class="alt-card">
         <span class="alt-tag">대안</span>
         <h4>기존 ERP에 연결</h4>
         <p class="alt-desc">지금 쓰고 있는 ERP에 새 시스템을 덧붙여 연결합니다.</p>
@@ -1057,8 +913,7 @@
     <h3 class="option-title">선택 2 / 3 — 거래처 발주 방식</h3>
     <p class="option-desc">대리점이나 병원 담당자가 어떤 방식으로 주문을 넣을지 결정합니다.</p>
     <div class="recommend-layout">
-      <div class="recommend-card" onclick="selectOption('order', 'A', this)" data-group="order">
-        <div class="check-badge"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div>
+      <div class="recommend-card">
         <span class="recommend-tag">권장</span>
         <h3>전용 웹사이트에서 직접 발주</h3>
         <p class="rc-desc">거래처 담당자가 전용 URL에 접속해서 품목을 선택하고 수량을 입력합니다. 주문이 바로 시스템에 들어옵니다.</p>
@@ -1068,8 +923,7 @@
           <li>추가 비용 없음</li>
         </ul>
       </div>
-      <div class="alt-card" onclick="selectOption('order', 'B', this)" data-group="order">
-        <div class="check-badge"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div>
+      <div class="alt-card">
         <span class="alt-tag">대안</span>
         <h4>기존 방식(카톡/엑셀) + AI 자동 인식</h4>
         <p class="alt-desc">거래처는 지금처럼 카카오톡이나 엑셀로 발주하고, AI가 자동으로 시스템에 입력합니다.</p>
@@ -1088,8 +942,7 @@
     <h3 class="option-title">선택 3 / 3 — 사용 환경</h3>
     <p class="option-desc">PC와 모바일 모두에서 사용할 수 있는 방식을 결정합니다.</p>
     <div class="recommend-layout">
-      <div class="recommend-card" onclick="selectOption('platform', 'A', this)" data-group="platform">
-        <div class="check-badge"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div>
+      <div class="recommend-card">
         <span class="recommend-tag">권장</span>
         <h3>반응형 웹사이트</h3>
         <p class="rc-desc">PC, 태블릿, 스마트폰 모두에서 인터넷 브라우저로 접속합니다. 앱 설치가 필요 없습니다.</p>
@@ -1099,8 +952,7 @@
           <li>개발 비용이 낮고 업데이트가 즉시 반영</li>
         </ul>
       </div>
-      <div class="alt-card" onclick="selectOption('platform', 'B', this)" data-group="platform">
-        <div class="check-badge"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div>
+      <div class="alt-card">
         <span class="alt-tag">대안</span>
         <h4>모바일 앱 (iOS/Android)</h4>
         <p class="alt-desc">앱스토어에서 설치하는 전용 앱입니다.</p>
@@ -1117,196 +969,15 @@
   </div>
 </div>
 
-<div class="divider"></div>
-
-<!-- ===== 9. COMPLETE ===== -->
-<div class="complete-section fade-in" id="complete">
-  <div class="complete-icon">✅</div>
-  <h2>선택 내역을 확인해 주세요</h2>
-  <p>아래에서 선택하신 내용을 확인할 수 있습니다.<br>변경하고 싶으시면 위로 스크롤하여 다시 선택해 주세요.</p>
-
-  <div class="selection-summary" id="selectionSummary">
-    <h3>선택 요약</h3>
-    <div class="summary-row">
-      <span class="label">시스템 구축 방식</span>
-      <span class="value" id="sum-erp"><span class="pending">미선택</span></span>
-    </div>
-    <div class="summary-row">
-      <span class="label">거래처 발주 방식</span>
-      <span class="value" id="sum-order"><span class="pending">미선택</span></span>
-    </div>
-    <div class="summary-row">
-      <span class="label">사용 환경</span>
-      <span class="value" id="sum-platform"><span class="pending">미선택</span></span>
-    </div>
-  </div>
-
-  <button class="btn-submit" id="submitBtn" onclick="submitSelections()">선택 내용 제출하기</button>
-  <p class="submit-msg" id="submitMsg"></p>
-</div>
-
 <!-- ===== FOOTER ===== -->
 <footer>
   <img src="hamada-logo.png" alt="HAMADA LABS" style="height:28px;width:auto;opacity:0.3;margin-bottom:8px;"><br>
-  <button class="secret-btn" id="secretBtn">© 2026 HAMADA LABS</button>
+  © 2026 HAMADA LABS
 </footer>
 
-<!-- ===== ADMIN MODAL ===== -->
-<div class="admin-overlay" id="adminOverlay" onclick="if(event.target===this)closeAdmin()">
-  <div class="admin-modal">
-    <h2>🔑 관리자 확인 — 선택 결과</h2>
-    <div id="adminResult"></div>
-    <button class="close-btn" onclick="closeAdmin()">닫기</button>
-  </div>
-</div>
-
 <script>
-// ===== SELECTION STATE =====
-const selections = JSON.parse(localStorage.getItem('rtbio_selections') || '{}');
-
-const labels = {
-  erp: { A: '새로운 맞춤 시스템 (독립 구축)', B: '기존 ERP 연동형' },
-  order: { A: '웹사이트 직접 발주', B: '기존 방식 + AI 자동 인식' },
-  platform: { A: '반응형 웹사이트', B: '모바일 앱 (iOS/Android)' }
-};
-
-const labelNames = {
-  erp: '시스템 구축 방식',
-  order: '거래처 발주 방식',
-  platform: '사용 환경'
-};
-
-// Restore selections on load
-document.addEventListener('DOMContentLoaded', () => {
-  Object.keys(selections).forEach(group => {
-    const cards = document.querySelectorAll(`.wc-card[data-group="${group}"]`);
-    cards.forEach(card => {
-      const isA = card.querySelector('.wc-badge.blue, .wc-badge.teal, .wc-badge.green:not(.wc-badge.orange)');
-      // simpler approach: check card index
-    });
-  });
-  updateSummary();
-  initScrollAnimations();
-});
-
-function selectOption(group, value, el) {
-  selections[group] = value;
-  localStorage.setItem('rtbio_selections', JSON.stringify(selections));
-
-  // Update card visuals — support both old wc-card and new recommend/alt cards
-  const cards = document.querySelectorAll(`[data-group="${group}"]`);
-  cards.forEach(card => {
-    card.classList.remove('selected', 'dimmed');
-    if (card === el) {
-      card.classList.add('selected');
-    } else {
-      card.classList.add('dimmed');
-    }
-  });
-
-  updateSummary();
-}
-
-function updateSummary() {
-  ['erp', 'order', 'platform'].forEach(key => {
-    const el = document.getElementById('sum-' + key);
-    if (selections[key]) {
-      el.innerHTML = labels[key][selections[key]];
-    } else {
-      el.innerHTML = '<span class="pending">미선택</span>';
-    }
-  });
-}
-
-// ===== SUBMIT =====
-async function submitSelections() {
-  const btn = document.getElementById('submitBtn');
-  const msg = document.getElementById('submitMsg');
-
-  // Check all selected
-  const allSelected = selections.erp && selections.order && selections.platform;
-  if (!allSelected) {
-    msg.className = 'submit-msg error';
-    msg.textContent = '아직 선택하지 않은 항목이 있습니다. 위로 스크롤하여 모든 항목을 선택해 주세요.';
-    return;
-  }
-
-  btn.disabled = true;
-  btn.textContent = '전송 중...';
-  msg.className = '';
-  msg.textContent = '';
-
-  try {
-    const response = await fetch('/api/send-email', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ selections }),
-    });
-
-    if (response.ok) {
-      btn.textContent = '제출 완료 ✓';
-      msg.className = 'submit-msg success';
-      msg.textContent = '선택 내용이 메일로 전송되었습니다. 감사합니다!';
-    } else {
-      throw new Error('전송 실패');
-    }
-  } catch (err) {
-    btn.disabled = false;
-    btn.textContent = '선택 내용 제출하기';
-    msg.className = 'submit-msg error';
-    msg.textContent = '전송에 실패했습니다. 잠시 후 다시 시도해 주세요.';
-  }
-}
-
-// ===== SECRET ADMIN BUTTON (5 rapid clicks) =====
-let clickCount = 0;
-let clickTimer = null;
-
-document.getElementById('secretBtn').addEventListener('click', () => {
-  clickCount++;
-  if (clickTimer) clearTimeout(clickTimer);
-  clickTimer = setTimeout(() => { clickCount = 0; }, 1500);
-
-  if (clickCount >= 5) {
-    clickCount = 0;
-    openAdmin();
-  }
-});
-
-// Also ?admin=true in URL
-if (new URLSearchParams(window.location.search).get('admin') === 'true') {
-  setTimeout(openAdmin, 500);
-}
-
-function openAdmin() {
-  const result = document.getElementById('adminResult');
-  let html = '<div style="font-size:14px;">';
-
-  ['erp', 'order', 'platform'].forEach(key => {
-    const val = selections[key];
-    html += `
-      <div style="padding:12px 0;border-bottom:1px solid #F3F4F6;">
-        <div style="font-size:12px;color:var(--text-muted);margin-bottom:4px;">${labelNames[key]}</div>
-        <div style="font-weight:600;color:${val ? 'var(--text)' : 'var(--text-muted)'};">
-          ${val ? `옵션 ${val}: ${labels[key][val]}` : '미선택'}
-        </div>
-      </div>`;
-  });
-
-  const ts = new Date().toLocaleString('ko-KR');
-  html += `<div style="padding:12px 0;font-size:12px;color:var(--text-muted);">확인 시각: ${ts}</div>`;
-  html += '</div>';
-
-  result.innerHTML = html;
-  document.getElementById('adminOverlay').classList.add('open');
-}
-
-function closeAdmin() {
-  document.getElementById('adminOverlay').classList.remove('open');
-}
-
 // ===== SCROLL ANIMATIONS =====
-function initScrollAnimations() {
+document.addEventListener('DOMContentLoaded', () => {
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
@@ -1316,7 +987,7 @@ function initScrollAnimations() {
   }, { threshold: 0.15 });
 
   document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
-}
+});
 </script>
 </body>
 </html>
