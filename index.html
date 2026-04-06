@@ -81,6 +81,8 @@
   .hero .logo { height: 78px; width: auto; margin-bottom: 28px; filter: invert(1); }
   .hero h1 { font-size: 42px; font-weight: 700; margin-bottom: 16px; line-height: 1.3; }
   .hero p { font-size: 18px; opacity: 0.85; max-width: 560px; margin: 0 auto; line-height: 1.7; }
+  .hero-rtbio-logo { height: 42px; width: auto; vertical-align: middle; margin: 0 4px; }
+  .mobile-br { display: none; }
 
   /* ===== SECTIONS ===== */
   .section {
@@ -584,10 +586,15 @@
 
   /* ===== SMALL SCREEN FALLBACK ===== */
   @media (max-width: 640px) {
-    .hero { padding: 80px 24px 60px; }
-    .hero h1 { font-size: 28px; }
-    .hero p { font-size: 16px; }
+    .hero { padding: 80px 20px 60px; }
+    .hero .logo { height: 52px; margin-bottom: 20px; }
+    .hero h1 { font-size: 24px; line-height: 1.5; word-break: keep-all; }
+    .hero-rtbio-logo { height: 28px; margin: 0 2px; }
+    .mobile-br { display: inline; }
+    .hero p { font-size: 14px; line-height: 1.6; word-break: keep-all; }
     .section, .worldcup { padding: 40px 20px; }
+    .section h2 { font-size: 20px; word-break: keep-all; }
+    .section p, .wc-desc { word-break: keep-all; }
     .problem-grid { grid-template-columns: 1fr; }
     .wc-cards { grid-template-columns: 1fr; }
     .wc-vs {
@@ -608,6 +615,14 @@
     }
     .role-grid { grid-template-columns: 1fr; }
     .security-grid { grid-template-columns: 1fr 1fr; }
+    .option-title { font-size: 17px; word-break: keep-all; }
+    .recommend-card { padding: 20px; }
+    .recommend-card h3 { font-size: 17px; }
+    .alt-card { padding: 16px; }
+    .tl-content h4 { word-break: keep-all; }
+    .tl-separator span { font-size: 10px; }
+    .tl-item.separate-project { padding: 16px 14px 16px 12px; }
+    .flow-content h4, .feature-content h4 { word-break: keep-all; }
   }
 </style>
 </head>
@@ -620,7 +635,7 @@
   </video>
   <div class="hero-content">
     <img src="hamada-logo.png" alt="HAMADA LABS" class="logo">
-    <h1>업무를 더 스마트하게,<br><img src="rtbio-logo.png" alt="RTBIO" style="height:42px;width:auto;vertical-align:middle;margin:0 4px;"> 맞춤 자동화 시스템</h1>
+    <h1>업무를 더 스마트하게,<br><img src="rtbio-logo.png" alt="RTBIO" class="hero-rtbio-logo"> 맞춤<br class="mobile-br"> 자동화 시스템</h1>
     <p>엑셀과 수기 작업에서 벗어나, 클릭 한 번으로 발주부터 정산까지 자동으로 처리되는 시스템을 소개합니다.</p>
   </div>
 </div>
